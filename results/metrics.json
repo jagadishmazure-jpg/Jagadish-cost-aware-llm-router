@@ -1,0 +1,717 @@
+{
+ "budget": {
+  "accuracy": {
+   "ci95": [
+    0.6128,
+    0.7747
+   ],
+   "k": 84,
+   "n": 120,
+   "rate": 0.7
+  },
+  "cap_usd": 0.012246,
+  "downgraded": 0,
+  "refused": 0,
+  "served": {
+   "ci95": [
+    0.969,
+    1.0
+   ],
+   "k": 120,
+   "n": 120,
+   "rate": 1.0
+  },
+  "spent_usd": 0.007803,
+  "timeouts": 0,
+  "within_cap": true
+ },
+ "budget_tight": {
+  "accuracy": {
+   "ci95": [
+    0.3402,
+    0.5144
+   ],
+   "k": 51,
+   "n": 120,
+   "rate": 0.425
+  },
+  "cap_usd": 0.002449,
+  "downgraded": 13,
+  "refused": 54,
+  "served": {
+   "ci95": [
+    0.4608,
+    0.6361
+   ],
+   "k": 66,
+   "n": 120,
+   "rate": 0.55
+  },
+  "spent_usd": 0.002021,
+  "timeouts": 0,
+  "within_cap": true
+ },
+ "by_family_router": {
+  "arith1": {
+   "ci95": [
+    0.7536,
+    0.9906
+   ],
+   "k": 18,
+   "n": 19,
+   "rate": 0.9474
+  },
+  "arith2": {
+   "ci95": [
+    0.0,
+    0.1546
+   ],
+   "k": 0,
+   "n": 21,
+   "rate": 0.0
+  },
+  "date_calc": {
+   "ci95": [
+    0.3003,
+    0.665
+   ],
+   "k": 12,
+   "n": 25,
+   "rate": 0.48
+  },
+  "extract_id": {
+   "ci95": [
+    0.8513,
+    1.0
+   ],
+   "k": 22,
+   "n": 22,
+   "rate": 1.0
+  },
+  "intent": {
+   "ci95": [
+    0.6669,
+    0.9863
+   ],
+   "k": 12,
+   "n": 13,
+   "rate": 0.9231
+  },
+  "json_extract": {
+   "ci95": [
+    0.8389,
+    1.0
+   ],
+   "k": 20,
+   "n": 20,
+   "rate": 1.0
+  }
+ },
+ "cost_model": {
+  "price_as_of": "2026-11-09",
+  "region": "eastus2",
+  "usd_per_hour": 0.384,
+  "utilisation": 1.0,
+  "vm": "Standard_D8s_v5"
+ },
+ "data": {
+  "test": 120,
+  "train": 351,
+  "val": 129
+ },
+ "frontier_test": [
+  {
+   "accuracy": 0.4833,
+   "threshold": 0.05,
+   "usd_per_1k": 0.05024
+  },
+  {
+   "accuracy": 0.5333,
+   "threshold": 0.1,
+   "usd_per_1k": 0.04667
+  },
+  {
+   "accuracy": 0.5583,
+   "threshold": 0.15,
+   "usd_per_1k": 0.05864
+  },
+  {
+   "accuracy": 0.575,
+   "threshold": 0.2,
+   "usd_per_1k": 0.05962
+  },
+  {
+   "accuracy": 0.6417,
+   "threshold": 0.25,
+   "usd_per_1k": 0.06328
+  },
+  {
+   "accuracy": 0.65,
+   "threshold": 0.3,
+   "usd_per_1k": 0.0632
+  },
+  {
+   "accuracy": 0.6583,
+   "threshold": 0.35,
+   "usd_per_1k": 0.0628
+  },
+  {
+   "accuracy": 0.675,
+   "threshold": 0.4,
+   "usd_per_1k": 0.06363
+  },
+  {
+   "accuracy": 0.6833,
+   "threshold": 0.45,
+   "usd_per_1k": 0.06372
+  },
+  {
+   "accuracy": 0.6917,
+   "threshold": 0.5,
+   "usd_per_1k": 0.06406
+  },
+  {
+   "accuracy": 0.6917,
+   "threshold": 0.55,
+   "usd_per_1k": 0.06406
+  },
+  {
+   "accuracy": 0.6917,
+   "threshold": 0.6,
+   "usd_per_1k": 0.06406
+  },
+  {
+   "accuracy": 0.6917,
+   "threshold": 0.65,
+   "usd_per_1k": 0.06406
+  },
+  {
+   "accuracy": 0.6917,
+   "threshold": 0.7,
+   "usd_per_1k": 0.06512
+  },
+  {
+   "accuracy": 0.7,
+   "threshold": 0.75,
+   "usd_per_1k": 0.06503
+  },
+  {
+   "accuracy": 0.7,
+   "threshold": 0.8,
+   "usd_per_1k": 0.06503
+  },
+  {
+   "accuracy": 0.7083,
+   "threshold": 0.85,
+   "usd_per_1k": 0.06511
+  },
+  {
+   "accuracy": 0.7083,
+   "threshold": 0.9,
+   "usd_per_1k": 0.06527
+  },
+  {
+   "accuracy": 0.7083,
+   "threshold": 0.95,
+   "usd_per_1k": 0.06865
+  }
+ ],
+ "guardrails": {
+  "budget_overruns": 0,
+  "injection_route_changes": 0,
+  "pii_detect_precision": 1.0,
+  "pii_detect_recall": 1.0,
+  "pii_prompts_total": 42,
+  "residency_violations": 0
+ },
+ "models": [
+  "qwen2.5-0.5b",
+  "qwen2.5-1.5b",
+  "phi-3.5-mini"
+ ],
+ "outage": {
+  "breaker_fallback": {
+   "accuracy": {
+    "ci95": [
+     0.4773,
+     0.6519
+    ],
+    "k": 68,
+    "n": 120,
+    "rate": 0.5667
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   }
+  },
+  "no_fallback": {
+   "accuracy": {
+    "ci95": [
+     0.3878,
+     0.5637
+    ],
+    "k": 57,
+    "n": 120,
+    "rate": 0.475
+   },
+   "served": {
+    "ci95": [
+     0.6924,
+     0.8405
+    ],
+    "k": 93,
+    "n": 120,
+    "rate": 0.775
+   }
+  },
+  "requests_affected_window": [
+   20,
+   70
+  ],
+  "tier_down": "qwen2.5-1.5b"
+ },
+ "per_model": {
+  "phi-3.5-mini": {
+   "accuracy": {
+    "ci95": [
+     0.5612,
+     0.7295
+    ],
+    "k": 78,
+    "n": 120,
+    "rate": 0.65
+   },
+   "by_family": {
+    "arith1": {
+     "ci95": [
+      0.7536,
+      0.9906
+     ],
+     "k": 18,
+     "n": 19,
+     "rate": 0.9474
+    },
+    "arith2": {
+     "ci95": [
+      0.0,
+      0.1546
+     ],
+     "k": 0,
+     "n": 21,
+     "rate": 0.0
+    },
+    "date_calc": {
+     "ci95": [
+      0.3003,
+      0.665
+     ],
+     "k": 12,
+     "n": 25,
+     "rate": 0.48
+    },
+    "extract_id": {
+     "ci95": [
+      0.782,
+      0.9919
+     ],
+     "k": 21,
+     "n": 22,
+     "rate": 0.9545
+    },
+    "intent": {
+     "ci95": [
+      0.6669,
+      0.9863
+     ],
+     "k": 12,
+     "n": 13,
+     "rate": 0.9231
+    },
+    "json_extract": {
+     "ci95": [
+      0.5313,
+      0.8881
+     ],
+     "k": 15,
+     "n": 20,
+     "rate": 0.75
+    }
+   },
+   "mean_latency_s": 2.0,
+   "usd_per_1k_unrouted": 0.21332
+  },
+  "qwen2.5-0.5b": {
+   "accuracy": {
+    "ci95": [
+     0.3798,
+     0.5556
+    ],
+    "k": 56,
+    "n": 120,
+    "rate": 0.4667
+   },
+   "by_family": {
+    "arith1": {
+     "ci95": [
+      0.1915,
+      0.5896
+     ],
+     "k": 7,
+     "n": 19,
+     "rate": 0.3684
+    },
+    "arith2": {
+     "ci95": [
+      0.0,
+      0.1546
+     ],
+     "k": 0,
+     "n": 21,
+     "rate": 0.0
+    },
+    "date_calc": {
+     "ci95": [
+      0.0071,
+      0.1954
+     ],
+     "k": 1,
+     "n": 25,
+     "rate": 0.04
+    },
+    "extract_id": {
+     "ci95": [
+      0.782,
+      0.9919
+     ],
+     "k": 21,
+     "n": 22,
+     "rate": 0.9545
+    },
+    "intent": {
+     "ci95": [
+      0.2914,
+      0.7679
+     ],
+     "k": 7,
+     "n": 13,
+     "rate": 0.5385
+    },
+    "json_extract": {
+     "ci95": [
+      0.8389,
+      1.0
+     ],
+     "k": 20,
+     "n": 20,
+     "rate": 1.0
+    }
+   },
+   "mean_latency_s": 0.277,
+   "usd_per_1k_unrouted": 0.02955
+  },
+  "qwen2.5-1.5b": {
+   "accuracy": {
+    "ci95": [
+     0.5273,
+     0.6988
+    ],
+    "k": 74,
+    "n": 120,
+    "rate": 0.6167
+   },
+   "by_family": {
+    "arith1": {
+     "ci95": [
+      0.7536,
+      0.9906
+     ],
+     "k": 18,
+     "n": 19,
+     "rate": 0.9474
+    },
+    "arith2": {
+     "ci95": [
+      0.0,
+      0.1546
+     ],
+     "k": 0,
+     "n": 21,
+     "rate": 0.0
+    },
+    "date_calc": {
+     "ci95": [
+      0.0222,
+      0.2497
+     ],
+     "k": 2,
+     "n": 25,
+     "rate": 0.08
+    },
+    "extract_id": {
+     "ci95": [
+      0.8513,
+      1.0
+     ],
+     "k": 22,
+     "n": 22,
+     "rate": 1.0
+    },
+    "intent": {
+     "ci95": [
+      0.6669,
+      0.9863
+     ],
+     "k": 12,
+     "n": 13,
+     "rate": 0.9231
+    },
+    "json_extract": {
+     "ci95": [
+      0.8389,
+      1.0
+     ],
+     "k": 20,
+     "n": 20,
+     "rate": 1.0
+    }
+   },
+   "mean_latency_s": 0.516,
+   "usd_per_1k_unrouted": 0.05509
+  }
+ },
+ "policies": {
+  "always:phi-3.5-mini": {
+   "accuracy": {
+    "ci95": [
+     0.5612,
+     0.7295
+    ],
+    "k": 78,
+    "n": 120,
+    "rate": 0.65
+   },
+   "escalated": 0,
+   "latency_p50_s": 1.1,
+   "latency_p95_s": 5.308,
+   "mix": {
+    "phi-3.5-mini": 110,
+    "qwen2.5-1.5b": 10
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.20411
+  },
+  "always:qwen2.5-0.5b": {
+   "accuracy": {
+    "ci95": [
+     0.3798,
+     0.5556
+    ],
+    "k": 56,
+    "n": 120,
+    "rate": 0.4667
+   },
+   "escalated": 0,
+   "latency_p50_s": 0.21,
+   "latency_p95_s": 0.529,
+   "mix": {
+    "qwen2.5-0.5b": 120
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.02955
+  },
+  "always:qwen2.5-1.5b": {
+   "accuracy": {
+    "ci95": [
+     0.5273,
+     0.6988
+    ],
+    "k": 74,
+    "n": 120,
+    "rate": 0.6167
+   },
+   "escalated": 0,
+   "latency_p50_s": 0.43,
+   "latency_p95_s": 1.153,
+   "mix": {
+    "qwen2.5-1.5b": 120
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.05509
+  },
+  "oracle": {
+   "accuracy": {
+    "ci95": [
+     0.6303,
+     0.7896
+    ],
+    "k": 86,
+    "n": 120,
+    "rate": 0.7167
+   },
+   "escalated": 0,
+   "latency_p50_s": 0.225,
+   "latency_p95_s": 1.292,
+   "mix": {
+    "phi-3.5-mini": 10,
+    "qwen2.5-0.5b": 90,
+    "qwen2.5-1.5b": 20
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.04342
+  },
+  "random": {
+   "accuracy": {
+    "ci95": [
+     0.4939,
+     0.6676
+    ],
+    "k": 70,
+    "n": 120,
+    "rate": 0.5833
+   },
+   "escalated": 0,
+   "latency_p50_s": 0.491,
+   "latency_p95_s": 3.822,
+   "mix": {
+    "phi-3.5-mini": 43,
+    "qwen2.5-0.5b": 39,
+    "qwen2.5-1.5b": 38
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.10757
+  },
+  "router": {
+   "accuracy": {
+    "ci95": [
+     0.6042,
+     0.7673
+    ],
+    "k": 83,
+    "n": 120,
+    "rate": 0.6917
+   },
+   "escalated": 0,
+   "latency_p50_s": 0.319,
+   "latency_p95_s": 1.516,
+   "mix": {
+    "phi-3.5-mini": 27,
+    "qwen2.5-0.5b": 66,
+    "qwen2.5-1.5b": 27
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.06446
+  },
+  "router+escalation": {
+   "accuracy": {
+    "ci95": [
+     0.6128,
+     0.7747
+    ],
+    "k": 84,
+    "n": 120,
+    "rate": 0.7
+   },
+   "escalated": 2,
+   "latency_p50_s": 0.333,
+   "latency_p95_s": 1.516,
+   "mix": {
+    "phi-3.5-mini": 27,
+    "qwen2.5-0.5b": 64,
+    "qwen2.5-1.5b": 29
+   },
+   "served": {
+    "ci95": [
+     0.969,
+     1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "rate": 1.0
+   },
+   "usd_per_1k": 0.06503
+  }
+ },
+ "predictor": {
+  "phi-3.5-mini": {
+   "auc": 0.9313,
+   "brier": 0.0955
+  },
+  "qwen2.5-0.5b": {
+   "auc": 0.9735,
+   "brier": 0.0627
+  },
+  "qwen2.5-1.5b": {
+   "auc": 0.9868,
+   "brier": 0.0261
+  }
+ },
+ "threshold": {
+  "chosen": 0.8,
+  "quality_floor_gap": 0.02,
+  "val_always_large_accuracy": 0.6667
+ },
+ "tiers": {
+  "phi-3.5-mini": "large",
+  "qwen2.5-0.5b": "small",
+  "qwen2.5-1.5b": "medium"
+ },
+ "vs_always_large": {
+  "cost_ratio": 0.3186,
+  "router_right_large_wrong": 8,
+  "router_wrong_large_right": 2
+ }
+}

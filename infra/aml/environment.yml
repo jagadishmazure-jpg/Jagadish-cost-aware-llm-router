@@ -1,0 +1,10 @@
+name: cost-aware-llm-router
+channels: [conda-forge]
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - numpy==2.5.4
+      - scipy==1.18.1
+      - scikit-learn==1.9.1
+      - azureml-inference-server-http==1.5.1

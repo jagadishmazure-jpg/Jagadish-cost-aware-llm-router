@@ -1,0 +1,9 @@
+{
+ "_note": "Three open-weight chat models run on CPU with llama.cpp. Weights are downloaded by scripts/fetch_models.sh, never committed.",
+ "tiers": [
+  {"label": "qwen2.5-0.5b", "tier": "small", "params_b": 0.5, "file": "qwen2.5-0.5b-instruct-q4_k_m.gguf", "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf", "sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db", "license": "Apache-2.0"},
+  {"label": "qwen2.5-1.5b", "tier": "medium", "params_b": 1.5, "file": "qwen2.5-1.5b-instruct-q4_k_m.gguf", "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-q4_k_m.gguf", "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e", "license": "Apache-2.0"},
+  {"label": "phi-3.5-mini", "tier": "large", "params_b": 3.8, "file": "Phi-3.5-mini-instruct-Q4_K_M.gguf", "url": "https://huggingface.co/bartowski/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q4_K_M.gguf", "sha256": "e4165e3a71af97f1b4820da61079826d8752a2088e313af0c7d346796c38eff5", "license": "MIT"}
+ ],
+ "sampling": {"temperature": 0.0, "max_tokens": 80, "n_ctx": 1024, "n_threads": 8}
+}
