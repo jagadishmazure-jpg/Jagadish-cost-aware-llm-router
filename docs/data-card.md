@@ -39,5 +39,6 @@ regenerated numbers will differ; the committed file is what was measured.
 
 - Small models and short, templated tasks: the router learns request types easily. Real traffic is messier.
 - The "large" tier is a 3.8B model, not a frontier model. Its prices and quality are not those of a hosted
-  frontier model; the method carries over, the numbers do not.
+  frontier model; the method carries over, the numbers do not. GPT-6.2 Sol, GPT-6.2 Astra and the
+  Baseten-hosted names in the [hosted portfolio](portfolio.md) have no rows in `runs.jsonl`.
 - Latency was measured on a shared box; other processes ran at the same time.
