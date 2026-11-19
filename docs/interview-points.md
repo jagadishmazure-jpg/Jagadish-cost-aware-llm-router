@@ -30,6 +30,8 @@ breaker, escalation and a data-residency rule sit around it, each with a test an
 
 **What I would do next**
 
-- Add a hosted per-token tier and open-ended tasks scored by a judge calibrated against human labels.
+- The hosted catalog prices GPT-6.2 Sol and Astra from the published API rates, and leaves Azure Foundry
+  and Bedrock at `[verify]` ([portfolio.md](portfolio.md)). It still needs measured quality on those models
+  before it can replace the learned router. Open-ended tasks need a judge calibrated against human labels.
 - Learn from production feedback (thumbs, retries) with a shadow router before switching.
 - Deploy the gated Microsoft Foundry endpoint in a sandbox subscription and measure real latency.

@@ -20,7 +20,7 @@ data-residency guardrails. Every number is from a replay of real, measured model
   **31.9%**<!-- m:vs_always_large/cost_ratio --> of the cost and a p95 latency of 1.516 s<!-- m:policies/router+escalation/latency_p95_s -->
   instead of 5.308 s<!-- m:policies/always:phi-3.5-mini/latency_p95_s -->. The confidence intervals overlap, so the
   honest claim is "same quality, about a third of the cost". 0<!-- m:guardrails/residency_violations --> residency
-  violations, 0<!-- m:guardrails/budget_overruns --> budget overruns. <!-- tests -->74<!-- /tests --> tests, CI green.
+  violations, 0<!-- m:guardrails/budget_overruns --> budget overruns. <!-- tests -->84<!-- /tests --> tests, CI green.
 
 ## Purpose and who it is for
 
@@ -28,8 +28,9 @@ data-residency guardrails. Every number is from a replay of real, measured model
 - **ML engineers** who want a small, honest routing baseline with a replayable evaluation.
 - **Architects** who need cost controls and data rules that are code with tests, not a slide.
 
-It is a reference build on synthetic tasks with small models. It does not prove anything about
-large hosted models or open-ended requests.
+It is a reference build on synthetic tasks with small models. The measured results do not prove
+anything about large hosted models or open-ended requests. A separate hosted portfolio records
+published API rates and leaves unpublished cloud rates marked [verify]. It does not score those models.
 
 ## Architecture
 
@@ -165,6 +166,7 @@ pip install -r requirements.txt
 python -m pytest -q                       # tests
 python scripts/run_eval.py                # all metrics -> results/
 python examples/route_demo.py             # five example requests
+python examples/portfolio_demo.py         # hosted rates, [verify] providers, automatic mode
 python -m costroute.service "How many boxes are on 4 pallets of 12? Answer with a number only."
 ```
 
@@ -202,8 +204,9 @@ Threat model (STRIDE and OWASP LLM Top 10): [docs/threat-model.md](docs/threat-m
 - **Escalation rarely fires** (2 of 120): a wrong answer in the right format passes the format check.
   Test: `test_known_miss_escalation_rarely_fires`.
 - Accuracy intervals overlap between the router and always-large. 120 test tasks cannot separate them.
-- Cost is CPU seconds on one VM type at full use. Hosted per-token prices, idle time and batching would
-  change the ratios; `CostModel(utilisation=...)` lets you try that.
+- Cost of the measured router is CPU seconds on one VM type at full use. Idle time and batching would
+  change the ratios; `CostModel(utilisation=...)` lets you try that. Hosted list prices are a separate
+  catalog (`costroute/portfolio.py`) and are not mixed into these ratios.
 - Synthetic tasks with checkable answers, English, one domain, three small models. Open-ended requests
   would need a calibrated judge (Planned).
 
@@ -217,13 +220,77 @@ Threat model (STRIDE and OWASP LLM Top 10): [docs/threat-model.md](docs/threat-m
 | Escalation, budget cap with reservation, circuit breaker, residency, directive stripping | Built |
 | Replay eval with Wilson intervals, paired comparison, CI eval gate | Built |
 | Router service, CLI and Azure ML scoring script (unit-tested offline) | Built |
+| Hosted portfolio: GPT-6.2 Sol and Astra API rates, cached-input cost, automatic mode | Built (no measured quality) |
+| Azure Foundry and Bedrock token rates for those models | [verify] (unpublished in the cited posts) |
+| Baseten-hosted open models (Kimi-K3, GLM 5.3, GLM-5.3-Flash, DeepSeek V4.1-Flash-1017) | Named mocks, unpriced |
 | Terraform + Bicep for a Microsoft Foundry / Azure ML endpoint, deploy workflow | Written, not run (gated off) |
-| Hosted per-token pricing tier, open-ended tasks with a calibrated judge | Planned |
+| Open-ended tasks with a calibrated judge | Planned |
 | Online learning from production feedback, private networking | Planned |
+
+## Hosted portfolio
+
+Published standard API rates, from the
+[GPT-6.2 Astra and Sol announcement](https://openai.com/index/introducing-gpt-6-2-astra-sol/),
+per million tokens:
+
+| Model | Input | Cached input | Output | Role |
+|---|---|---|---|---|
+| GPT-6.2 Sol | $2 | $0.10 | $10 | Everyday work and multistep agentic workflows |
+| GPT-6.2 Astra | $8 | $0.40 | $40 | Frontier professional work |
+
+The same model ids are offered on Azure Foundry and on Bedrock (`amazon_bedrock`). Those prices are
+**[verify]**. The [Bedrock availability post](https://academy.openai.com/public/clubs/openai-on-aws/blogs/gpt-62-astra-and-gpt-62-sol-are-now-available-on-amazon-bedrock-2026-11-18)
+announces the models and does not publish a token rate. The [Foundry models post](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/from-model-choice-to-your-durable-advantage-build-ai-that-keeps-improving/4573609)
+describes automatic routing and names the Baseten models; it does not publish a token rate for Sol or
+Astra. The OpenAI rate is not copied onto either provider. Cached input is its own rate in the
+estimator. Uncached tokens are input minus cached tokens.
+
+Automatic mode follows that Foundry post: simple prompts use the smaller model (Sol), and prompts
+that need judgment (investigate, recommend, slides, spreadsheets) use Astra. Multistep agentic
+prompts stay on Sol. Baseten-hosted models named in the Foundry post — Kimi-K3, GLM 5.3,
+GLM-5.3-Flash, DeepSeek V4.1-Flash-1017 — are unpriced mocks on Azure Foundry and are not selected.
+Personal data still stays on the local tiers.
+
+<!-- run: python examples/portfolio_demo.py -->
+```text
+published OpenAI API rates, USD per million tokens (input / cached input / output)
+  gpt-6.2-sol: $2 / $0.10 / $10
+  gpt-6.2-astra: $8 / $0.40 / $40
+provider prices for the same model ids
+  gpt-6.2-sol on azure_foundry: [verify]
+  gpt-6.2-astra on azure_foundry: [verify]
+  gpt-6.2-sol on amazon_bedrock: [verify]
+  gpt-6.2-astra on amazon_bedrock: [verify]
+unpriced Baseten mocks on azure_foundry: Kimi-K3, GLM 5.3, GLM-5.3-Flash, DeepSeek V4.1-Flash-1017
+cost of 1,000,000 input tokens (200,000 cached) and 50,000 output tokens
+  gpt-6.2-sol openai: $2.12
+  gpt-6.2-astra openai: $8.48
+  gpt-6.2-sol azure_foundry: [verify]
+  gpt-6.2-astra azure_foundry: [verify]
+  gpt-6.2-sol amazon_bedrock: [verify]
+  gpt-6.2-astra amazon_bedrock: [verify]
+automatic routing
+  [simple] openai -> gpt-6.2-sol published $2.12
+  [agentic] openai -> gpt-6.2-sol published $2.12
+  [frontier] openai -> gpt-6.2-astra published $8.48
+  [simple] azure_foundry -> gpt-6.2-sol [verify]
+  [agentic] azure_foundry -> gpt-6.2-sol [verify]
+  [frontier] azure_foundry -> gpt-6.2-astra [verify]
+  [simple] amazon_bedrock -> gpt-6.2-sol [verify]
+  [agentic] amazon_bedrock -> gpt-6.2-sol [verify]
+  [frontier] amazon_bedrock -> gpt-6.2-astra [verify]
+skipped unpriced on azure_foundry: kimi-k3, glm-5.3, glm-5.3-flash, deepseek-v4.1-flash-1017
+personal data on azure_foundry: refused=true
+```
+<!-- /run -->
+
+Detail, the cost formula and the limits: [docs/portfolio.md](docs/portfolio.md). Decision record:
+[ADR 0006](docs/adr/0006-published-token-rates-only.md).
 
 ## Docs
 
 - [Data card](docs/data-card.md) and [model card](docs/model-card.md)
+- [Hosted portfolio](docs/portfolio.md)
 - [Implementation guide](docs/implementation-guide.md) for teams adopting this
 - [Interview points](docs/interview-points.md)
 - [Threat model](docs/threat-model.md), [deployment](docs/deployment.md), [ADRs](docs/adr/)
