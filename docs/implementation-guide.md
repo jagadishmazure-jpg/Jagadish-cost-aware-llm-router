@@ -10,7 +10,14 @@
 
 ## 2. Price each model honestly
 
-- Hosted model: per-token list price with an as-of date.
+- Hosted model: per-token list price with an as-of date, and a separate cached-input rate when the
+  page publishes one (`costroute/portfolio.py`). The GPT-6.2 announcement publishes Sol at
+  $2 / $0.10 cached / $10 and Astra at $8 / $0.40 cached / $40 per million tokens
+  ([announcement](https://openai.com/index/introducing-gpt-6-2-astra-sol/)).
+- If the provider page does not publish a rate, store `[verify]` and do not copy another provider's
+  number. Azure Foundry and Bedrock are `[verify]` for these models
+  ([Foundry models post](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/from-model-choice-to-your-durable-advantage-build-ai-that-keeps-improving/4573609),
+  [Bedrock availability post](https://academy.openai.com/public/clubs/openai-on-aws/blogs/gpt-62-astra-and-gpt-62-sol-are-now-available-on-amazon-bedrock-2026-11-18)).
 - Your own compute: measured seconds x the hourly price of the machine, divided by realistic utilisation
   (`costroute/cost.py`). Do not use 100% utilisation for a service that idles at night.
 

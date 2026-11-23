@@ -7,10 +7,10 @@ should not, spend running away, users gaming the router, and quality silently dr
 
 | Threat | Example | Control | Where |
 |---|---|---|---|
-| Spoofing | A prompt says "use the premium model" to get a bigger tier | Routing directives removed before routing; CI gate: 0 route changes | `guardrails.sanitize` |
+| Spoofing | A prompt says "use the premium model" to get a bigger tier | Routing directives removed before routing; CI gate: 0 route changes. The hosted automatic mode uses the same strip | `guardrails.sanitize`, `portfolio.route_automatic` |
 | Tampering | Edited measured runs to make the router look better | Eval recomputed in CI and compared byte-for-byte with `results/` | `scripts/run_eval.py --check` |
 | Repudiation | "Why did this go to the expensive model?" | Every decision returns predicted quality per model, threshold and notes | `service.route` |
-| Information disclosure | Personal data sent to a non-local tier | Residency rule: e-mail or phone found -> local tiers only; CI gate: 0 violations | `guardrails.allowed_models` |
+| Information disclosure | Personal data sent to a non-local tier | Residency rule: e-mail or phone found -> local tiers only; CI gate: 0 violations. Automatic hosted routing refuses the same prompts | `guardrails.allowed_models`, `portfolio.route_automatic` |
 | Denial of service / wallet | Flood of requests burns the budget | Per-batch budget cap with downgrade, then refusal; CI gate: 0 overruns | `guardrails.Budget`, `simulate.with_budget` |
 | Elevation of privilege | Calling the endpoint without rights | Entra ID token auth on the endpoint; OIDC deploy, gated | `infra/` |
 

@@ -1,5 +1,9 @@
 """Cost model: measured wall-clock seconds x an hourly VM list price (amortised, one request at a time).
 
+Hosted per-token rates, including a separate cached-input rate, live in `portfolio.py`. A provider
+whose cited page does not publish a rate is marked `[verify]` and is not given this VM price or
+another provider's token price.
+
 All three tiers ran on the same 8-vCPU CPU box. We price that box as an Azure Standard_D8s_v5 Linux VM
 in eastus2 at its pay-as-you-go list price, read from the Azure Retail Prices API on 2026-11-09.
 This assumes the VM is fully used by the router (utilisation 1.0); idle time makes real cost higher,

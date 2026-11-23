@@ -20,3 +20,7 @@ new task type needs new measured runs and a retrain.
 
 **Ethics and safety.** Personal data never reaches the large tier, whatever the predictor says. The
 predictor only picks among models a policy already allows.
+
+**Hosted models.** GPT-6.2 Sol and Astra are not scored by this predictor. Their catalog, cached-input
+cost and automatic mode are in the [hosted portfolio](portfolio.md). That mode also refuses personal
+data. Azure Foundry and Bedrock prices for those models are [verify].

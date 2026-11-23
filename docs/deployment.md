@@ -44,6 +44,9 @@ small Log Analytics, storage and Key Vault charges. The large-tier Foundry deplo
 separately and is not part of this IaC. Delete the resource group to stop charges. Check current prices
 and get approval before enabling the workflow.
 
+GPT-6.2 Sol and Astra token rates on Azure Foundry and on Bedrock are **[verify]** in the hosted
+portfolio. The OpenAI API list price is not a substitute. See [portfolio.md](portfolio.md).
+
 ## One-time setup (only if approved)
 
 1. Entra app registration with a federated credential for this repo's `dev` environment.
